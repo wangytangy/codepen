@@ -1,0 +1,11 @@
+.umbreon {
+  width: 33px;
+  height: 42px;
+  transform: scale(5.5) translateX(20px) translateY(17px);
+  background: url(https://www.spriters-resource.com/resources/sheets/23/24916.png) no-repeat;
+  animation: playX 0.7s steps(6) infinite;
+}
+
+@keyframes playX {
+  100% { background-position-x: -216px; }
+}
