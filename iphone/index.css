@@ -7,7 +7,8 @@ body {
   justify-content: center;
   align-items: center;
   background: radial-gradient(ellipse at center, rgba(76,76,76,1) 0%, rgba(0,0,0,1) 84%, rgba(0,0,0,1) 100%);
-  height: 100vh;
+
+  padding: 50px;
 }
 
 .frame {
@@ -38,13 +39,6 @@ body {
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
-
-/* .inner-frame-2:hover {
-  animation-name: flash_border;
-  animation-duration: 2s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-} */
 
 @keyframes flash_border {
   0% {
