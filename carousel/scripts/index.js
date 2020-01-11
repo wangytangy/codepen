@@ -1,56 +1,64 @@
-const NUM_CELLS = 5;
+const NUM_CARDS = 5;
 let idx = 0;
 
-function addTemporaryClass (node, className, ms) {
-  node.classList.add(className);
+function addClassNameForMS (card, className, ms) {
+  card.classList.add(className);
   setTimeout(() => {
-    node.classList.remove(className);
+    card.classList.remove(className);
   }, ms);
 }
 
-function showNextCell () {
-  const cells = document.querySelectorAll('.cell');
+function showNextCard () {
+  const cards = document.querySelectorAll('.card');
   const currentIdx = idx;
-  const prevIdx = currentIdx === 0 ? NUM_CELLS - 1 : idx - 1;
-  idx = idx === NUM_CELLS - 1 ? 0 : idx + 1;
+  // get next idx
+  const nextIdx = idx === NUM_CARDS - 1 ? 0 : idx + 1;
 
-  cells[currentIdx].classList.remove('move-in-left');
-  cells[currentIdx].classList.remove('move-in-right');
-  addTemporaryClass(cells[currentIdx], 'move-left', 1000);
+  cards[currentIdx].classList.remove('move-in-left');
+  cards[currentIdx].classList.remove('move-in-right');
 
-  cells[idx].classList.add('move-in-left');
+  cards[nextIdx].classList.add('move-in-left');
+  addClassNameForMS(cards[currentIdx], 'move-out-left', 950);
+
+  // increment idx
+  idx = nextIdx;
 }
 
-function showPrevCell () {
-  const cells = document.querySelectorAll('.cell');
+function showPrevCard () {
+  const cards = document.querySelectorAll('.card');
   const currentIdx = idx;
-  const prevIdx = NUM_CELLS - 1 ? 0 : idx + 1;
-  idx = idx === 0 ? NUM_CELLS - 1 : idx - 1;
+  // get next idx
+  const nextIdx = idx === 0 ? NUM_CARDS - 1 : idx - 1;
 
-  cells[currentIdx].classList.remove('move-in-right');
-  cells[currentIdx].classList.remove('move-in-left');
-  addTemporaryClass(cells[currentIdx], 'move-right', 1000);
+  cards[currentIdx].classList.remove('move-in-right');
+  cards[currentIdx].classList.remove('move-in-left');
 
-  cells[idx].classList.add('move-in-right');
+  cards[nextIdx].classList.add('move-in-right');
+  addClassNameForMS(cards[currentIdx], 'move-out-right', 950);
+
+  // increment idx
+  idx = nextIdx;
 }
 
-function addCells (numCells, parentEl) {
-  for (let i = 0; i < numCells; i++) {
-    const cell = document.createElement('div');
-    cell.innerHTML = `${i + 1}`;
-    cell.classList.add('cell');
+function addCards (numCards, parentEl) {
+  for (let i = 0; i < numCards; i++) {
+    const card = document.createElement('div');
+    card.innerHTML = `${i + 1}`;
+    card.classList.add('card');
     const randomColor = Math.floor(Math.random()*16777215).toString(16);
-    cell.style.backgroundColor = `#${randomColor}`;
-    // make first cell visible by default
-    if (i === 0) cell.classList.add('move-in-right');
-    parentEl.append(cell);
+    card.style.backgroundColor = `#${randomColor}`;
+    // make first card visible by default
+    if (i === 0) card.classList.add('move-in-right');
+    parentEl.append(card);
   }
 }
 
 function unfreezeAnimations () {
-  // all animation duration is 0s by default so exit/enter animations will not play on page load
+  /**
+    all animation duration is 0s by default so that exit/enter animations will not play on page load
 
-  // setTimeout callback will allow animations after 1 second
+    this setTimeout callback will allow animations after 1 second
+  */
   setTimeout(() => {
     document.body.className='';
   }, 1000);
@@ -61,7 +69,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
   const prevBtn = document.getElementById('prev-btn');
   const carouselContainer = document.getElementById('carousel-container');
   unfreezeAnimations();
-  addCells(NUM_CELLS, carouselContainer);
-  nextBtn.addEventListener('click', showNextCell);
-  prevBtn.addEventListener('click', showPrevCell);
+  addCards(NUM_CARDS, carouselContainer);
+  nextBtn.addEventListener('click', showNextCard);
+  prevBtn.addEventListener('click', showPrevCard);
 });

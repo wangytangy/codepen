@@ -40,12 +40,14 @@ body {
   animation-iteration-count: infinite;
 }
 
+
+
 @keyframes flash_border {
   0% {
     border-color: #00FF41;
   }
   50% {
-    border-color: #003B00;
+    border-color: #003E00;
   }
   100% {
     border-color: #00FF41;
@@ -204,14 +206,4 @@ body {
 
 .front-camera:after{
 	background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.2));
-}
-
-.copy {
-  width: 298px;
-  height: 594px;
-
-  background-image: url('https://static-www.o2.co.uk/sites/default/files/product_images/apple/apple_iphone_x_64gb_space_grey/iphone-x-space-grey-sku-header.png');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
 }
